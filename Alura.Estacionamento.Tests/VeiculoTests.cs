@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Alura.Estacionamento.Tests
 {
-    public class VeiculoTests
+    public class VeiculoTests : IDisposable
     {
         //Arrange
          Veiculo veiculo = new Veiculo();
@@ -39,7 +39,6 @@ namespace Alura.Estacionamento.Tests
         public void TestaVeiculoClass(Veiculo modelo)
         {
             //Arrange
-            var veiculo = new Veiculo();
 
             //Act
             veiculo.Acelerar(10);
@@ -50,20 +49,24 @@ namespace Alura.Estacionamento.Tests
         }
 
         [Fact]
-        public void DadosAutomovel()
+        public void FichaCadastralAutomovel()
         {
             //Arrange
-            var carro = new Veiculo();
-            carro.Proprietario = "Carlos Silva";
-            carro.Placa = "ZAP-7419";
-            carro.Cor = "Verde";
-            carro.Modelo = "Variante";
-            carro.Tipo = TipoVeiculo.Automovel;
+            veiculo.Proprietario = "Carlos Silva";
+            veiculo.Placa = "ZAP-7419";
+            veiculo.Cor = "Verde";
+            veiculo.Modelo = "Variante";
+            veiculo.Tipo = TipoVeiculo.Automovel;
             //Act
-            string dados = carro.ToString();
+            string dados = veiculo.ToString();
 
             //Assert
             Assert.Contains("Ficha do veículo:", dados);
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

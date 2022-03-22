@@ -9,14 +9,17 @@ using Xunit;
 
 namespace Alura.Estacionamento.Tests
 {
-     public class PatioTests
-    {
+     public class PatioTests : IDisposable
+    {   
+        //Conceito de Setup
+        //Arrange
+        Veiculo veiculo = new Veiculo();
+        Patio estacionamento = new Patio();
+
         [Fact]
-        public void ValidaFaturamento()
+        public void ValidaFaturamentoUmVeiculo()
         {
             //Arrange
-            Veiculo veiculo = new Veiculo();
-            Patio estacionamento = new Patio();
             veiculo.Placa = "DRT-9269";
             veiculo.Modelo = "Ford KA";
             veiculo.Tipo = TipoVeiculo.Automovel;
@@ -39,8 +42,6 @@ namespace Alura.Estacionamento.Tests
         public void ValidaFaturamentoVariosVeiculos(string nome, string placa, string cor, string modelo)
         {
             //Arrange
-            Veiculo veiculo = new Veiculo();
-            Patio estacionamento = new Patio();
             veiculo.Placa = placa;
             veiculo.Modelo = modelo;
             veiculo.Tipo = TipoVeiculo.Automovel;
@@ -59,11 +60,9 @@ namespace Alura.Estacionamento.Tests
 
         [Theory]
         [InlineData("Ana Clara", "GEO-9090", "Vermelho", "Ford Focus")]
-        public void LocalizaVeiculo(string proprietario, string placa, string cor, string modelo)
+        public void LocalizaVeiculoPorPlaca(string proprietario, string placa, string cor, string modelo)
         {
             //Arrange
-            Veiculo veiculo = new Veiculo();
-            Patio estacionamento = new Patio();
             veiculo.Placa = placa;
             veiculo.Modelo = modelo;
             veiculo.Tipo = TipoVeiculo.Automovel;
@@ -79,11 +78,9 @@ namespace Alura.Estacionamento.Tests
 
         }
         [Fact]
-        public void AlterarDadosVeiculo()
+        public void AlterarDadosVeiculoPorPlaca()
         {
             //Arrange
-            Veiculo veiculo = new Veiculo();
-            Patio estacionamento = new Patio();
             veiculo.Placa = "DRT-9269";
             veiculo.Modelo = "Ka";
             veiculo.Tipo = TipoVeiculo.Automovel;
@@ -102,6 +99,11 @@ namespace Alura.Estacionamento.Tests
 
             //Assert
             Assert.Equal(retorno.Cor, veiculoAlterado.Cor);
+
+        }
+
+        public void Dispose()
+        {
 
         }
     }
